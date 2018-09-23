@@ -28,6 +28,17 @@
                             <p class="text-danger">{{ $errors->first('image') }}</p>
                             @endif
                         </div>
+                        <div class="form-check form-group">
+                            @foreach ($tags as $tag)
+                            <input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->id }}">
+                            <label class="form-check-label mr-5">
+                                {{ $tag->name }}
+                            </label>
+                            @endforeach
+                            @if ($errors->has('tags'))
+                            <p class="text-danger">{{ $errors->first('tags') }}</p>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label>Slug:</label>
                             <input type="text" name="slug" class="form-control"> @if ($errors->has('slug'))

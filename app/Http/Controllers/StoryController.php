@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Story;
+use App\Tag;
 use Session;
 use Illuminate\Http\Request;
 
@@ -10,17 +11,19 @@ class StoryController extends Controller
 {
     public function index()
     {
+        $tags = Tag::all();
         $stories = Story::orderBy('updated_at', 'desc')
                         ->paginate(5);
         $trashed_stories = Story::onlyTrashed()
                                 ->orderBy('deleted_at', 'desc')
                                 ->get();
-        return view('admin.stories.index', compact('stories', 'trashed_stories'));
+        return view('admin.stories.index', compact('stories', 'trashed_stories', 'tags'));
     }
 
     public function create()
     {
-        return view('admin.stories.create');
+        $tags = Tag::all();
+        return view('admin.stories.create', compact('tags'));
     }
 
     public function store(Request $request)
@@ -30,6 +33,7 @@ class StoryController extends Controller
             'body' => 'required|max:255',
             'image' => 'required',
             'slug' => 'required',
+            'tags' => 'required',
         ]);
         // Image handling
         // $image = $request->image;
@@ -42,14 +46,16 @@ class StoryController extends Controller
         $story->image = $request->image;
         $story->slug = $request->slug;
         $story->save();
+        $story->tags()->attach($request->tags); // An array, attach to pivot table
         Session::flash('success', 'Story created!');
         return redirect()->route('story.index');
     }
 
     public function show(Story $story, $id)
     {
+        $tags = Tag::all();
         $story = Story::find($id);
-        return view('admin.stories.show', compact('story'));
+        return view('admin.stories.show', compact('story', 'tags'));
     }
 
     public function update(Request $request, Story $story, $id)
@@ -74,6 +80,7 @@ class StoryController extends Controller
         // $story->image = $request->image;
         $story->slug = $request->slug;
         $story->save();
+        $story->tags()->sync($request->tags); // Sync the pivot table
         Session::flash('success', 'Story updated!');
         return redirect()->back();
     }
@@ -91,6 +98,7 @@ class StoryController extends Controller
         $trashed_story = Story::withTrashed()
                               ->where('id', $id)
                               ->first();
+        $trashed_story->tags()->detach();
         $trashed_story->forceDelete();
         Session::flash('success', 'Story permanently deleted!');
         return redirect()->route('story.index');

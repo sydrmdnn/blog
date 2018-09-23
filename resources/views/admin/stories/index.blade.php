@@ -6,7 +6,7 @@
         @include('partials.flash')
             <div class="card">
                 <div class="card-header">Your Stories
-                    <a href="" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#exampleModal">Trash</a>
+                    <a href="" class="btn btn-danger btn-sm float-right" data-toggle="modal" data-target="#exampleModal">Trash</a>
                 </div>
                 <div class="card-body">
                     @if ($stories->count() > 0)
@@ -16,6 +16,9 @@
                             <a href="{{ route('story.show', ['id' => $story->id]) }}"><h4 class="font-weight-bold">{{ $story->title }}</h4>
                             </a>
                             <p class="text-monospace">{{ $story->body }}</p>
+                            @foreach ($story->tags as $tag)
+                            <span class="badge badge-primary">{{ $tag->name }}</span>
+                            @endforeach
                         </div>
                     </div>
                     <br>
@@ -28,7 +31,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Trashed story</h5>

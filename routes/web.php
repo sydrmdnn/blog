@@ -28,3 +28,11 @@ Route::patch('/admin/story/{id}/update', 'StoryController@update')              
 Route::delete('/admin/story/{id}/delete', 'StoryController@delete')                     ->name('story.delete');
 Route::delete('/admin/story/{id}/destroy', 'StoryController@destroy')                   ->name('story.destroy');
 Route::post('/admin/story/{id}/restore', 'StoryController@restore')                     ->name('story.restore');
+
+Route::get('/admin/tag/', 'TagController@index')                                    ->name('tag.index');
+Route::get('/admin/tag/create', 'TagController@create')                             ->name('tag.create');
+Route::post('/admin/tag/', 'TagController@store')                                   ->name('tag.store');
+Route::get('/admin/tag/{id}', 'TagController@show')                                 ->name('tag.show');
+Route::get('/admin/tag/{id}/edit', 'TagController@edit')                            ->name('tag.edit');
+Route::patch('/admin/tag/{id}/update', 'TagController@update')                      ->name('tag.update');
+Route::delete('/admin/tag/{id}/destroy', 'TagController@destroy')                     ->name('tag.destroy');

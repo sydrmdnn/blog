@@ -34,6 +34,23 @@
                             <p class="text-danger">{{ $errors->first('image') }}</p>
                             @endif
                         </div>
+                        <label>Tag:</label>
+                        <div class="form-check form-group">
+                            @foreach ($tags as $tag)
+                            <input class="form-check-input" type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                            @foreach ($story->tags as $t) {{-- Need to loop, many to many --}}
+                                @if ($tag->id == $t->id)
+                                    checked
+                                @endif
+                            @endforeach
+                            >
+                            <label class="form-check-label mr-5">
+                                {{ $tag->name }}
+                            </label>
+                            @endforeach @if ($errors->has('tags'))
+                            <p class="text-danger">{{ $errors->first('tags') }}</p>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label>Slug:</label>
                             <input type="text" name="slug" class="form-control" value="{{ $story->slug }}"> @if ($errors->has('slug'))

@@ -20,4 +20,10 @@ class Story extends Model
     {
         return asset($value);
     }
+
+    // Then run 'php artisan make:migration create_story_tag_table', add post_id and tag_id column
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 }
