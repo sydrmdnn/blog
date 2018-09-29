@@ -32,7 +32,7 @@ class StoryController extends Controller
             'title' => 'required|max:255',
             'body' => 'required|max:255',
             'image' => 'required',
-            'slug' => 'required',
+            'url' => 'required',
             'tags' => 'required',
         ]);
         // Image handling
@@ -44,7 +44,7 @@ class StoryController extends Controller
         $story->title = $request->title;
         $story->body = $request->body;
         $story->image = $request->image;
-        $story->slug = $request->slug;
+        $story->url = $request->url;
         $story->save();
         $story->tags()->attach($request->tags); // An array, attach to pivot table
         Session::flash('success', 'Story created!');
@@ -64,7 +64,7 @@ class StoryController extends Controller
             'title' => 'required|max:255',
             'body' => 'required|max:255',
             'image' => 'sometimes',
-            'slug' => 'required',
+            'url' => 'required',
         ]);
         $story = Story::find($id);
         // Image handling
@@ -78,7 +78,7 @@ class StoryController extends Controller
         $story->title = $request->title;
         $story->body = $request->body;
         // $story->image = $request->image;
-        $story->slug = $request->slug;
+        $story->url = $request->url;
         $story->save();
         $story->tags()->sync($request->tags); // Sync the pivot table
         Session::flash('success', 'Story updated!');

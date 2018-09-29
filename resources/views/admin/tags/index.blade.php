@@ -18,7 +18,7 @@
                                 <div class="card-body">
                                     <h5>{{ $tag->name }}</h5>
                                     <p>{{ $tag->description }}</p>
-                                    <p>{{ $tag->slug }}</p>
+                                    <p>{{ $tag->url }}</p>
                                 </div>
                                 <div class="card-footer">
                                     <a href="{{ route('tag.edit', ['id' => $tag->id ]) }}" class="btn btn-success btn-sm float-right ml-2">Update</a>
@@ -58,8 +58,8 @@
                         </div>
                         <div class="form-group">
                             <label>Slug:</label>
-                            <input type="text" name="slug" class="form-control"> @if ($errors->has('slug'))
-                            <p class="text-danger">{{ $errors->first('slug') }}</p>
+                            <input type="text" name="url" class="form-control"> @if ($errors->has('url'))
+                            <p class="text-danger">{{ $errors->first('url') }}</p>
                             @endif
                         </div>
                         <div class="form-group">

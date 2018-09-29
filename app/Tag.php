@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     protected $fillable = [
-        'name', 'slug', 'description'
+        'name', 'url', 'description'
     ];
     
     public function stories()

@@ -17,7 +17,7 @@ class CreateStoriesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('body');
-            $table->string('slug');
+            $table->string('url');
             $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();

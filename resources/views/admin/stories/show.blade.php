@@ -53,8 +53,8 @@
                         </div>
                         <div class="form-group">
                             <label>Slug:</label>
-                            <input type="text" name="slug" class="form-control" value="{{ $story->slug }}"> @if ($errors->has('slug'))
-                            <p class="text-danger">{{ $errors->first('slug') }}</p>
+                            <input type="text" name="url" class="form-control" value="{{ $story->url }}"> @if ($errors->has('url'))
+                            <p class="text-danger">{{ $errors->first('url') }}</p>
                             @endif
                         </div>
                         <div class="form-group">

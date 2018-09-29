@@ -12,7 +12,7 @@ class Story extends Model
     protected $dates = ['deleted_at'];
     
     protected $fillable = [
-        'title', 'body', 'image', 'slug'
+        'title', 'body', 'image', 'url'
     ];
 
     // Accessor

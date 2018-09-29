@@ -19,12 +19,12 @@ class TagController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
-            'slug' => 'required',
+            'url' => 'required',
         ]);
         $tag = new Tag;
         $tag->name = $request->name;
         $tag->description = $request->description;
-        $tag->slug = $request->slug;
+        $tag->url = $request->url;
         $tag->save();
         Session::flash('success', 'Tag created!');
         return redirect()->back();
@@ -41,12 +41,12 @@ class TagController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
-            'slug' => 'required',
+            'url' => 'required',
         ]);
         $tag = Tag::find($id);
         $tag->name = $request->name;
         $tag->description = $request->description;
-        $tag->slug = $request->slug;
+        $tag->url = $request->url;
         $tag->save();
         Session::flash('success', 'Tag updated!');
         return redirect()->route('tag.index');
