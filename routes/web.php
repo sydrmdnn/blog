@@ -17,8 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/login/github', 'Auth\LoginController@redirectToProvider')                  ->name('login.github');
-Route::get('/login/github/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('/login/{provider}', 'Auth\SocialLoginController@redirectToProvider')
+     ->where('provider', 'github|twitter')
+     ->name('login.github');
+Route::get('/login/{provider}/callback', 'Auth\SocialLoginController@handleProviderCallback')
+     ->where('provider', 'github|twitter');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
