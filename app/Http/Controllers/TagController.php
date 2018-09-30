@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Tag;
 use Session;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {

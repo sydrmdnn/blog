@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Story;
 use App\Tag;
 use Session;
-use Illuminate\Http\Request;
 
 class StoryController extends Controller
 {
     public function index()
     {
         $tags = Tag::all();
-        $stories = Story::orderBy('updated_at', 'desc')
-                        ->paginate(5);
-        $trashed_stories = Story::onlyTrashed()
-                                ->orderBy('deleted_at', 'desc')
-                                ->get();
-        return view('admin.stories.index', compact('stories', 'trashed_stories', 'tags'));
+        $stories = Story::orderBy('updated_at', 'desc')->paginate(5);
+        $trashedStories = Story
+            ::onlyTrashed()
+            ->orderBy('deleted_at', 'desc')
+            ->get();
+        return view('admin.stories.index', compact('stories', 'trashedStories', 'tags'));
     }
 
     public function create()
@@ -95,9 +95,10 @@ class StoryController extends Controller
 
     public function destroy(Story $story, $id)
     {
-        $trashed_story = Story::withTrashed()
-                              ->where('id', $id)
-                              ->first();
+        $trashed_story = Story
+            ::withTrashed()
+            ->where('id', $id)
+            ->first();
         $trashed_story->tags()->detach();
         $trashed_story->forceDelete();
         Session::flash('success', 'Story permanently deleted!');
@@ -106,9 +107,10 @@ class StoryController extends Controller
 
     public function restore(Story $story, $id)
     {
-        $trashed_story = Story::onlyTrashed()
-                              ->where('id', $id)
-                              ->first();
+        $trashed_story = Story
+            ::onlyTrashed()
+            ->where('id', $id)
+            ->first();
         $trashed_story->restore();
         Session::flash('success', 'Story restored!');
         return redirect()->route('story.index');

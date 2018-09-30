@@ -11,11 +11,6 @@ use Auth;
 
 class SocialLoginController extends Controller
 {
-    /*
-    | https://laravel.com/docs/5.7/socialite
-    | https://www.youtube.com/watch?v=NK9OoqaoiC8
-    */
-
     use AuthenticatesUsers;
 
     protected $redirectTo = '/home';
@@ -26,7 +21,7 @@ class SocialLoginController extends Controller
     }
 
     /**
-     * Redirect the user to the GitHub authentication page.
+     * Redirect the user to the provider authentication page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,7 +31,7 @@ class SocialLoginController extends Controller
     }
 
     /**
-     * Obtain the user information from GitHub.
+     * Obtain the user information from provider.
      *
      * @return \Illuminate\Http\Response
      */

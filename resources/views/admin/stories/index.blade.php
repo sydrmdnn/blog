@@ -40,8 +40,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            @if ($trashed_stories->count() > 0) 
-                            @foreach ($trashed_stories as $trashed_story)
+                            @if ($trashedStories->count() > 0) 
+                            @foreach ($trashedStories as $trashed_story)
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h6>{{ $trashed_story->title }}</h6>
@@ -67,6 +67,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row justify-content-center my-4">
+        {{ $stories->links() }}
     </div>
 </div>
 @endsection
